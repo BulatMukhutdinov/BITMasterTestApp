@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Тестовое приложение</string>
+    <string name="search_hint">Название картинки</string>
+    <string name="search">Поиск</string>
+    <string name="page_number">Страница #%1$d</string>
+    <string name="general_error">Упс…что-то пошло не так</string>
+</resources>

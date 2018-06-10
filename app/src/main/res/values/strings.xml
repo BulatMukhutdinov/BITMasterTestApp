@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TestApp</string>
+    <string name="search_hint">Picture title</string>
+    <string name="search">Search</string>
+    <string name="page_number">Page #%1$d</string>
+    <string name="general_error">Oops…something broke</string>
+
+</resources>

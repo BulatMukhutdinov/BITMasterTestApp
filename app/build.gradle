@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+    }
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "ru.taximaster.testapp"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            resValue "string", "server_url", "https://api.flickr.com/"
+            resValue "string", "api_key", "06e8359602ab4f439350e796f596db3a"
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable true
+            resValue "string", "server_url", "https://api.flickr.com/"
+            resValue "string", "api_key", "06e8359602ab4f439350e796f596db3a"
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$androidSupportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$androidSupportLibraryVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.16.20'
+    compileOnly 'javax.annotation:javax.annotation-api:1.3.2'
+    annotationProcessor 'org.projectlombok:lombok:1.16.20'
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    // REST
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    // Rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+    testImplementation 'junit:junit:4.12'
+}
