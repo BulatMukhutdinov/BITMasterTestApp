@@ -8,9 +8,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import lombok.Getter;
+import lombok.Setter;
 import ru.taximaster.testapp.App;
 import ru.taximaster.testapp.data.dto.ResponseDto;
 import ru.taximaster.testapp.data.network.FlickrApi;
+import ru.taximaster.testapp.presentation.module.preview.photos.PhotosPresenter;
 
 
 public class PreviewViewModel extends ViewModel {
@@ -23,6 +25,10 @@ public class PreviewViewModel extends ViewModel {
     @Getter
     private MutableLiveData<ResponseDto> searchPhotos;
 
+    @Getter
+    @Setter
+    private PhotosPresenter callback;
+
     public PreviewViewModel() {
         compositeDisposable = new CompositeDisposable();
         photos = new MutableLiveData<>();
@@ -34,7 +40,7 @@ public class PreviewViewModel extends ViewModel {
             compositeDisposable.add(getDisposable(apiKey, page)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(photos::setValue));
+                    .subscribe(photos::setValue, callback::onLoadError));
         }
         return photos;
     }
@@ -43,7 +49,7 @@ public class PreviewViewModel extends ViewModel {
         compositeDisposable.add(FlickrApi.newCall().findPictures(apiKey, PAGE_SIZE, page, text)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(searchPhotos::setValue));
+                .subscribe(searchPhotos::setValue, callback::onLoadError));
     }
 
     private Single<ResponseDto> getDisposable(String apiKey, int page) {

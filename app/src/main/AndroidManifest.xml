@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ru.taximaster.testapp" >
 
     <uses-permission
@@ -13,7 +14,13 @@
         android:name=".App"
         android:hardwareAccelerated="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDoq89lM__f8sCRI6FwJKz08Dpm9Voelsg"/>
+
         <activity android:name=".presentation.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

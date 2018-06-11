@@ -4,5 +4,9 @@
     <string name="search">Search</string>
     <string name="page_number">Page #%1$d</string>
     <string name="general_error">Oops…something broke</string>
+    <string name="show_as_map">Show as map</string>
+    <string name="show_as_list">Show as list</string>
+    <string name="network_title">Network error</string>
+    <string name="network_message">Check internet connection</string>
 
 </resources>

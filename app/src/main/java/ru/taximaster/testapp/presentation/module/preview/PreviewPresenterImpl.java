@@ -9,9 +9,4 @@ public class PreviewPresenterImpl extends BasePresenter<PreviewView, MainRouter>
     public PreviewPresenterImpl(PreviewView view, MainRouter router) {
         super(view, router);
     }
-
-    @Override
-    public void onStart() {
-        router.enableToolbar(false);
-    }
 }

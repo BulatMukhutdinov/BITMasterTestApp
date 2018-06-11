@@ -5,4 +5,8 @@
     <string name="search">Поиск</string>
     <string name="page_number">Страница #%1$d</string>
     <string name="general_error">Упс…что-то пошло не так</string>
+    <string name="show_as_map">Показать на карте</string>
+    <string name="show_as_list">Показать списком</string>
+    <string name="network_title">Ошибка сети</string>
+    <string name="network_message">Проверьте интернет соединение</string>
 </resources>

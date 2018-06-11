@@ -40,12 +40,6 @@ public class PreviewFragment extends BaseFragment<PreviewPresenter> implements P
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        presenter.onStart();
-    }
-
-    @Override
     protected PreviewPresenter injectPresenter() {
         return PresenterInjector.providePreviewPresenter(this, (MainRouter) getActivity());
     }

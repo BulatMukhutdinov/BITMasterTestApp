@@ -7,6 +7,9 @@ import ru.taximaster.testapp.presentation.MainRouter;
 import ru.taximaster.testapp.presentation.module.detailed.DetailedPresenter;
 import ru.taximaster.testapp.presentation.module.detailed.DetailedPresenterImpl;
 import ru.taximaster.testapp.presentation.module.detailed.DetailedView;
+import ru.taximaster.testapp.presentation.module.map.MapPresenter;
+import ru.taximaster.testapp.presentation.module.map.MapPresenterImpl;
+import ru.taximaster.testapp.presentation.module.map.MapView;
 import ru.taximaster.testapp.presentation.module.preview.PreviewPresenter;
 import ru.taximaster.testapp.presentation.module.preview.PreviewPresenterImpl;
 import ru.taximaster.testapp.presentation.module.preview.PreviewView;
@@ -35,4 +38,8 @@ public class PresenterInjector {
         return new PreviewPresenterImpl(previewView, router);
     }
 
+    @NonNull
+    public static MapPresenter provideMapPresenter(MapView mapView, MainRouter router) {
+        return new MapPresenterImpl(mapView, router);
+    }
 }

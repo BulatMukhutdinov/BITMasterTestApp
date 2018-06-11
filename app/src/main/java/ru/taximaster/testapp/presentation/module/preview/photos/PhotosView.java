@@ -13,4 +13,6 @@ public interface PhotosView extends View {
     void showPictures(List<String> photos);
 
     void showError();
+
+    void showError(@StringRes int networkTitle, @StringRes int networkMessage);
 }

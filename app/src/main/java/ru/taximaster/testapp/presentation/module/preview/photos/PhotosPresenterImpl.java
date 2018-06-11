@@ -4,6 +4,7 @@ package ru.taximaster.testapp.presentation.module.preview.photos;
 import android.arch.lifecycle.ViewModelProviders;
 import android.widget.ImageView;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class PhotosPresenterImpl extends BasePresenter<PhotosView, MainRouter> i
 
     private CompositeDisposable compositeDisposable;
 
+    private ResponseDto responseDto;
+
     public PhotosPresenterImpl(PhotosView view, MainRouter router) {
         super(view, router);
         compositeDisposable = new CompositeDisposable();
@@ -30,6 +33,7 @@ public class PhotosPresenterImpl extends BasePresenter<PhotosView, MainRouter> i
     @Override
     public void onStart(int page) {
         PreviewViewModel previewViewModel = ViewModelProviders.of((PhotosFragment) view).get(PreviewViewModel.class);
+        previewViewModel.setCallback(this);
 
         previewViewModel.getPhotos(view.getString(R.string.api_key), page).observe(view, this::showResult);
         previewViewModel.getSearchPhotos().observe(view, this::showResult);
@@ -39,17 +43,40 @@ public class PhotosPresenterImpl extends BasePresenter<PhotosView, MainRouter> i
                 .subscribe(text -> previewViewModel.search(view.getString(R.string.api_key), page, text)));
     }
 
-    private void showResult(ResponseDto responseDto) {
-        if (responseDto.stat.equals(OK_STATUS)) {
-            List<String> urls = new ArrayList<>();
-            for (PhotoDto photo : responseDto.photos.photos) {
-                urls.add("http://farm" + photo.farm + ".static.flickr.com/"
-                        + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
-            }
-
-            view.showPictures(urls);
+    @Override
+    public void onLoadError(Throwable throwable) {
+        if (throwable instanceof UnknownHostException) {
+            view.showError(R.string.network_title, R.string.network_message);
         } else {
             view.showError();
+        }
+    }
+
+    @Override
+    public void mapMenuClicked() {
+        router.showMap(responseDto);
+    }
+
+    @Override
+    public void onResume() {
+        router.enableToolbar(false);
+    }
+
+    private void showResult(ResponseDto responseDto) {
+        if (view != null) {
+            this.responseDto = responseDto;
+
+            if (responseDto.stat.equals(OK_STATUS)) {
+                List<String> urls = new ArrayList<>();
+                for (PhotoDto photo : responseDto.photos.photos) {
+                    urls.add("http://farm" + photo.farm + ".static.flickr.com/"
+                            + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
+                }
+
+                view.showPictures(urls);
+            } else {
+                view.showError();
+            }
         }
     }
 
