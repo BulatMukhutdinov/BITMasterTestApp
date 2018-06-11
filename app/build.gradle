@@ -39,6 +39,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$androidSupportLibraryVersion"
+    implementation "com.android.support:support-v4:$androidSupportLibraryVersion"
+    implementation "com.android.support:support-media-compat:$androidSupportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$androidSupportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation "android.arch.lifecycle:extensions:1.1.1"
